@@ -1,9 +1,8 @@
 FROM openjdk:8-alpine AS base
 
-ENV GRADLE_HOME /root/.gradle
-ENV ANDROID_HOME /home/Android/sdk
-ARG ANDROID_SDK_LICESNSE=d56f5187479451eabf01fb78af6dfcb131a6481e
-ARG GLIBC_VERSION=2.28-r0
+ENV GRADLE_HOME=/root/.gradle \
+    ANDROID_HOME=/home/Android/sdk \
+    GLIBC_VERSION=2.28-r0
 
 # Configure gradle.
 RUN mkdir -p $GRADLE_HOME && \
@@ -16,7 +15,7 @@ RUN mkdir -p $GRADLE_HOME && \
     echo "kapt.use.worker.api=true" >> $GRADLE_HOME/gradle.properties && \
     # Add Android sdk licenses.
     mkdir -p "$ANDROID_HOME/licenses" || true && \
-    echo "$ANDROID_SDK_LICESNSE" > "$ANDROID_HOME/licenses/android-sdk-license" && \
+    echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license" && \
     # Configure java dependencies to work well with gradle/android.
     apk add --no-cache --virtual=.build-dependencies wget unzip ca-certificates bash && \
 	wget https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -O /etc/apk/keys/sgerrand.rsa.pub && \
