@@ -1,6 +1,11 @@
 FROM openjdk:8-alpine AS base
 
 ENV GRADLE_HOME /root/.gradle
+ENV ANDROID_HOME /home/Android/sdk
+ARG ANDROID_SDK_LICESNSE=d56f5187479451eabf01fb78af6dfcb131a6481e
+ARG GLIBC_VERSION=2.28-r0
+
+# Configure gradle.
 RUN mkdir -p $GRADLE_HOME && \
     echo "org.gradle.jvmargs=-Xmx4000M" >> $GRADLE_HOME/gradle.properties && \
     echo "org.gradle.daemon=false" >> $GRADLE_HOME/gradle.properties && \
@@ -8,15 +13,12 @@ RUN mkdir -p $GRADLE_HOME && \
     echo "org.gradle.parallel.intra=true" >> $GRADLE_HOME/gradle.properties && \
     echo "org.gradle.caching=true" >> $GRADLE_HOME/gradle.properties && \
     echo "android.enableBuildCache=true" >> $GRADLE_HOME/gradle.properties && \
-    echo "kapt.use.worker.api=true" >> $GRADLE_HOME/gradle.properties
-
-ARG ANDROID_SDK_LICESNSE=d56f5187479451eabf01fb78af6dfcb131a6481e
-ENV ANDROID_HOME /home/Android/sdk
-RUN mkdir -p "$ANDROID_HOME/licenses" || true && \
-    echo "$ANDROID_SDK_LICESNSE" > "$ANDROID_HOME/licenses/android-sdk-license"
-
-ARG GLIBC_VERSION=2.28-r0
-RUN apk add --no-cache --virtual=.build-dependencies wget unzip ca-certificates bash && \
+    echo "kapt.use.worker.api=true" >> $GRADLE_HOME/gradle.properties && \
+    # Add Android sdk licenses.
+    mkdir -p "$ANDROID_HOME/licenses" || true && \
+    echo "$ANDROID_SDK_LICESNSE" > "$ANDROID_HOME/licenses/android-sdk-license" && \
+    # Configure java dependencies to work well with gradle/android.
+    apk add --no-cache --virtual=.build-dependencies wget unzip ca-certificates bash && \
 	wget https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -O /etc/apk/keys/sgerrand.rsa.pub && \
 	wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O /tmp/glibc.apk && \
 	wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk -O /tmp/glibc-bin.apk && \
