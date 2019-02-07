@@ -9,7 +9,7 @@ Build
 
 Tag
 ===
-`docker tag docker tag  apline-android-gradle:latest jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}`
+`docker tag  apline-android-gradle:latest jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}`
 
 Push
 ====
