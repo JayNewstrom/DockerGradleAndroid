@@ -2,7 +2,7 @@ FROM openjdk:8-alpine AS base
 
 ENV GRADLE_HOME=/root/.gradle \
     ANDROID_HOME=/home/Android/sdk \
-    GLIBC_VERSION=2.28-r0
+    GLIBC_VERSION=2.29-r0
 
 # Configure gradle.
 RUN mkdir -p $GRADLE_HOME && \
