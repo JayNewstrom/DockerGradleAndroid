@@ -7,7 +7,6 @@ ENV GRADLE_HOME=/root/.gradle \
 # Configure gradle.
 RUN mkdir -p $GRADLE_HOME && \
     echo "org.gradle.jvmargs=-Xmx4000M" >> $GRADLE_HOME/gradle.properties && \
-    echo "org.gradle.daemon=false" >> $GRADLE_HOME/gradle.properties && \
     echo "org.gradle.parallel=true" >> $GRADLE_HOME/gradle.properties && \
     echo "org.gradle.parallel.intra=true" >> $GRADLE_HOME/gradle.properties && \
     echo "org.gradle.caching=true" >> $GRADLE_HOME/gradle.properties && \
