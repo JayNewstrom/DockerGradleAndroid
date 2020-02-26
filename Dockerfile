@@ -31,8 +31,8 @@ FROM base AS cache
 WORKDIR "/home/src"
 # Copy all source into the container, so it can be built.
 COPY . .
-# Trigger gradle, so that we cache the gradle wrapper and the android sdk.
-RUN ./gradlew dependencies
+# Trigger gradle, so that we cache the gradle wrapper and the android sdk, and the build tools.
+RUN ./gradlew :app:assembleDebug
 
 # ----------------------------------------------------------------------------------------------------------------------
 

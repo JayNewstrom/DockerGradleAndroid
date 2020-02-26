@@ -1,20 +1,18 @@
-Overview
-========
+## Dockerhub
+Use from [Dockerhub](https://hub.docker.com/r/jaynewstrom/alpine-gradle-android)
 
-Dockerhub: https://hub.docker.com/r/jaynewstrom/alpine-gradle-android
+`docker run --rm -v "$PWD":/home/src jaynewstrom/alpine-gradle-android:latest ./gradlew assemble`
 
-Build
-=====
-`docker build -t apline-android-gradle .`
+## Local Development
 
-Tag
-===
-`docker tag  apline-android-gradle:latest jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}`
+#### Build
+`docker build -t alpine-gradle-android .`
 
-Push
-====
+#### Tag
+`docker tag  alpine-gradle-android:latest jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}`
+
+#### Push
 `docker push jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}`
 
-Run
-===
+#### Run
 `docker run --rm -v "$PWD":/home/src alpine-gradle-android:latest ./gradlew assemble`
