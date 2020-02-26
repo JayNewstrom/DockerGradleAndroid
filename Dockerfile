@@ -2,7 +2,7 @@ FROM openjdk:8-alpine AS base
 
 ENV GRADLE_HOME=/root/.gradle \
     ANDROID_HOME=/home/Android/sdk \
-    GLIBC_VERSION=2.29-r0
+    GLIBC_VERSION=2.30-r0
 
 # Configure gradle.
 RUN mkdir -p $GRADLE_HOME && \
@@ -16,7 +16,7 @@ RUN mkdir -p $GRADLE_HOME && \
     mkdir -p "$ANDROID_HOME/licenses" || true && \
     echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_HOME/licenses/android-sdk-license" && \
     # Configure java dependencies to work well with gradle/android.
-    apk add --no-cache --virtual=.build-dependencies wget unzip ca-certificates bash && \
+    apk add --no-cache wget unzip ca-certificates bash && \
 	wget https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -O /etc/apk/keys/sgerrand.rsa.pub && \
 	wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk -O /tmp/glibc.apk && \
 	wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk -O /tmp/glibc-bin.apk && \
