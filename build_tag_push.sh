@@ -18,6 +18,6 @@ AGP_VERSION=$2
 gsed -i "/androidGradlePluginVersion=/ s/=.*/=${AGP_VERSION}/" gradle.properties
 
 # Docker.
-docker build -t apline-android-gradle .
-docker tag  apline-android-gradle:latest jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}
+docker build -t alpine-android-gradle .
+docker tag  alpine-android-gradle:latest jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}
 docker push jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}
