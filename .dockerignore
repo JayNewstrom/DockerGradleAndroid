@@ -6,3 +6,4 @@ local.properties
 */build
 .git*
 build_tag_push.sh
+remoteBuild

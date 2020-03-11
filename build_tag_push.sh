@@ -17,7 +17,12 @@ AGP_VERSION=$2
 
 gsed -i "/androidGradlePluginVersion=/ s/=.*/=${AGP_VERSION}/" gradle.properties
 
+VERSION_TAG="gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}"
 # Docker.
 docker build -t alpine-android-gradle .
-docker tag  alpine-android-gradle:latest jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}
-docker push jaynewstrom/alpine-gradle-android:gradle-${GRADLE_VERSION}_agp-${AGP_VERSION}
+docker tag alpine-android-gradle:latest jaynewstrom/alpine-gradle-android:${VERSION_TAG}
+docker push jaynewstrom/alpine-gradle-android:${VERSION_TAG}
+
+docker build -t remote-build --build-arg CONTAINER_TAG=${VERSION_TAG} -f remoteBuild/Dockerfile remoteBuild/.
+docker tag remote-build:latest jaynewstrom/alpine-gradle-android-remote-build:${VERSION_TAG}
+docker push jaynewstrom/alpine-gradle-android-remote-build:${VERSION_TAG}
