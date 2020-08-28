@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv sh
+
+if [ -f "/etc/ssh/ssh_host_rsa_key" ]; then
+	echo "Starting sshd."
+    /usr/sbin/sshd -D
+fi

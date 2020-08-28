@@ -1,0 +1,4 @@
+/etc/ssh/ true root 0644 0644
+/etc/ssh/ssh_host_rsa_key false root 0600 0600
+
+/root/.ssh/authorized_keys false root 0644 0644

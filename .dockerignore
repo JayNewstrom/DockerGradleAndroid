@@ -1,9 +1,8 @@
-*.iml
-.gradle
-local.properties
+android-sample/*.iml
+android-sample/.gradle
+android-sample/local.properties
 .idea
 */.DS_Store
 */build
 .git*
 build_tag_push.sh
-remoteBuild
