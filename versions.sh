@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-export GRADLE_VERSION=6.6.1
-export AGP_VERSION=4.0.1
+export GRADLE_VERSION=6.7
+export AGP_VERSION=4.1.0
